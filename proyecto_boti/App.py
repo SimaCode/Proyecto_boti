@@ -5,7 +5,7 @@
 #flash: permite mandar mensajes entre vistas desde el servidor
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_mysqldb import MySQL
-
+#probando git
 
 
 app = Flask(__name__)
