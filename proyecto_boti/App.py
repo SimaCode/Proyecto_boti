@@ -44,13 +44,15 @@ def add_product():
         distribuidora = request.form['distribuidora']
         valorVenta = request.form['valorVenta']
         valorCosto = request.form['valorCosto']
-        #CALCULO PORCENTAJE DE GANANCIA
-        porcentajeGanancia = request.form['porcentajeGanancia']
+        #porcentaje ganancia
+        resultado = ((int(valorVenta) - int(valorCosto)) / int(valorVenta)) * 100
+        resultadoEnTexto=str(resultado)
+        #porcentajeGanancia = request.form['porcentajeGanancia']
         #OBTENGO LA CONECCION
         cur = mysql.connection.cursor()
         #ESCRIBO LA CONSULTA - EN ESTE CASO LA CONSULTA ES INSERTAR LOS DATOS  EN LA TABLA productos
         cur.execute('INSERT INTO productos (codigo, descripcion, distribuidora, valorVenta, valorCosto, porcentajeGanancia) VALUES (%s, %s, %s, %s, %s, %s)',
-        (codigo, descripcion, distribuidora, valorVenta, valorCosto, porcentajeGanancia))
+        (codigo, descripcion, distribuidora, valorVenta, valorCosto, resultadoEnTexto))
         #EJECUTO LA CONSULTA
         mysql.connection.commit()
         #MANDA MENSAJES DE SERVIDOR ENTRE VISTAS
@@ -79,7 +81,9 @@ def update_product(id):
         distribuidora = request.form['distribuidora']
         valorVenta = request.form['valorVenta']
         valorCosto = request.form['valorCosto']
-        porcentajeGanancia = request.form['porcentajeGanancia']
+        #porcentaje ganancia
+        resultado = ((int(valorVenta) - int(valorCosto)) / int(valorVenta)) * 100
+        resultadoEnTexto=str(resultado)
         #CREO EL CURSOR PARA CONECTARME AL SERVIDOR
         cur = mysql.connection.cursor()
         #ESCRIBO LA CONSULTA- EN ESTE CASO ACTUALIZO LA TABLA productos CAMBIENDO LOS DATOS INDICADOS, DONDE EL id SEA IGUAL AL QUE LE PASO
@@ -92,7 +96,7 @@ def update_product(id):
             valorVenta = %s,
             porcentajeGanancia = %s
         WHERE id = %s
-    """, (codigo, descripcion, distribuidora, valorVenta,valorCosto, porcentajeGanancia, id))
+    """, (codigo, descripcion, distribuidora, valorVenta,valorCosto, resultadoEnTexto, id))
     #EJECUTO LA CONSULTA
     mysql.connection.commit()
     #MUESTRO MENSAJE DEL SERVIDOR
