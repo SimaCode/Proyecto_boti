@@ -81,7 +81,7 @@ def update_product(id):
         distribuidora = request.form['distribuidora']
         valorVenta = request.form['valorVenta']
         valorCosto = request.form['valorCosto']
-        #porcentaje ganancia
+        #porcentaje ganancia auto
         resultado = ((int(valorVenta) - int(valorCosto)) / int(valorVenta)) * 100
         resultadoEnTexto=str(resultado)
         #CREO EL CURSOR PARA CONECTARME AL SERVIDOR
