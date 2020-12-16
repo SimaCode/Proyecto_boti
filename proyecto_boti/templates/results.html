@@ -1,0 +1,51 @@
+<!--EXTIENDO EL LAYOUT-->
+{% extends 'layout.html' %}
+
+<!-- ABRO BLOQUE DE LO QUE VA A CAMBIAR, LO QUE SERÁ DISTINTO DEL LAYOUT-->
+{% block body %}
+<!--LA CLASE ROW ES SOLO PARA ESTILIZAR-->
+<div class="row">
+
+    <form action="/search" method="POST"></form>
+    <div class="col-md-7">
+        <!--CREO UNA TABLA PARA MOSTRAR LOS DATOS-->
+        <table class="table table-striped table-bordered bg-white table-sm">
+            <!--TITULOS DE LA TABLA-->
+            <thead>
+                <tr>
+                    <td>Codigo</td>
+                    <td>Descripcion</td>
+                    <td>Distribuidora</td>
+                    <td>Valor Costo</td>
+                    <td>Valor Venta</td>
+                    <td>Porcentaje Ganancias</td>
+                    <td>Operaciones</td>
+                </tr>
+            </thead>
+            <!--CUERPO DE LA TABLA-->
+            <tbody>
+                <!--PARA UN PRODUCTO EN EL ARREGLO DE PRODUCtOS QUE OBTENGO DESDE EL SERVIDOR, VOY A HACER ALGO-->
+
+                <!--CREO FILA POR CADA DATO QUE EXISTA-->
+                <tr>
+                    <!--el numero despues del punto representa la posicion del dato en el arreglo-->
+
+                    <td>{{ producto.1 }}</td>
+                    <td>{{ producto.2 }}</td>
+                    <td>{{ producto.3 }}</td>
+                    <td>{{ producto.4 }}</td>
+                    <td>{{ producto.5 }}</td>
+                    <td>{{ producto.6 }} %</td>
+                    <!--Tambien debo crear las celdas de los botones de OPERACIONES (en realidad son enlaces que lucen como botones)-->
+                    <td>
+                        <a href="/edit/{{ producto.0 }}" class="btn btn-secondary">Editar</a>
+                        <a href="/delete/{{ producto.0 }}" class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

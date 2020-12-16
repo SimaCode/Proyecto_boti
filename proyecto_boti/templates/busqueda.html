@@ -1,1 +1,75 @@
+<!--EXTIENDO EL LAYOUT-->
 {% extends 'layout.html' %}
+
+<!-- ABRO BLOQUE DE LO QUE VA A CAMBIAR, LO QUE SERÁ DISTINTO DEL LAYOUT-->
+{% block body %}
+<!--LA CLASE ROW ES SOLO PARA ESTILIZAR-->
+<div class="row">
+    <div class="col-md-4">
+        <!-- La funcion get_flashed_messages() nos retorna posibles mensajes que el servidor nos pueda estar mandando-->
+        <!--PRIMERO OBTENGO LOS MENSAJES QUE ME ENVIA EL SERVIDOR Y LOS GUARDO EN UN ARREGLO-->
+        {% with messages = get_flashed_messages()%}
+        <!--COMPRUEBO SI ES QUE EXISTEN MENSAJES-->
+        {% if messages %}
+        <!--SI EXISTEN MENSAJES ENTONCES LOS RECORRO ATRAVES DE UN CICLO FOR-->
+        {% for message in messages%}
+        <!--POR CADA MENSAJE RECORRIDO VOY A MOSTRAR UN TEXTO-->
+        <!--ESTE ESTILO DE MENSAJE DE ALERTA LO OBTUVE DE https://getbootstrap.com/docs/4.5/components/alerts/ -->
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <!--CIERRE DE BLOQUES-->
+        {% endfor %} {% endif %} {% endwith %}
+
+        <div class="card card-body">
+            <!--formulario hace la peticon POST a traves de esta ruta y este metodo, es decir: Envía el action a esta ruta atraves del metodo post-->
+            <form action="/buscar" method="POST">
+
+                <div class="form-group">
+                    <input type="text" name="search" placeholder="Codigo" class="form-control">
+                </div>
+                <div class="form-group">
+
+                    <button type="submit" class="btn btn-info btn-block">
+                        Buscar por Codigo
+                    </button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card card-body">
+            <div class="form-group">
+                <input type="text" name="info" placeholder="Descripcion" class="form-control">
+            </div>
+            <div class="form-group">
+
+                <button type="submit" class="btn btn-danger btn-block">
+                    Buscar por Descripcion
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card card-body">
+            <div class="form-group">
+                <input type="text" name="info" placeholder="Destribuidora" class="form-control">
+            </div>
+            <div class="form-group">
+
+                <button type="submit" class="btn btn-primary btn-block">
+                    Buscar por Distribuidora
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

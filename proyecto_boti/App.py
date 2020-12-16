@@ -121,9 +121,20 @@ def delete_product(id):
     return redirect(url_for('Index'))
 
 #RUTA PARA BUSCAR
-@app.route('/buscar')
-def buscar_producto():
+@app.route('/buscar', methods=['GET', 'POST'])
+def search():
+    if request.method == "POST":
+        codigo = request.form["search"]
+        cur = mysql.connection.cursor()
+        cur.execute('SELECT * FROM productos WHERE codigo = %s',(codigo,))
+        data =cur.fetchall()
+        return render_template("results.html", producto=data[0])
     return render_template('busqueda.html')
+
+
+
+
+
 
 
 #iniciar servidor y debug(reinicia auto. cada ves que hago cambios)
